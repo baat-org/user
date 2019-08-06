@@ -3,8 +3,8 @@ FROM java:8
 # Dockerfile author / maintainer
 MAINTAINER Sachin Goyal <sachin.goyal.se@gmail.com>
 
-VOLUME /opt/baat
+VOLUME /opt/user
 
-ADD target/baat-user*.jar /opt/baat/baat-user.jar
+ADD build/libs/user*.jar /opt/user/user.jar
 
-ENTRYPOINT ["java","-jar","/opt/baat/baat-user.jar"]
+ENTRYPOINT ["java","-jar","/opt/user/user.jar"]

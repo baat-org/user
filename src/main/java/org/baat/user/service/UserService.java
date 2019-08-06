@@ -17,6 +17,7 @@ import org.springframework.util.StringUtils;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -109,9 +110,10 @@ public class UserService {
 	public UserInfo getUserForToken(final String userToken) {
 		UserTokenEntity userTokenEntity = userTokenRepository.findByUserToken(userToken);
 		if (userTokenEntity != null) {
-			UserInfoEntity userInfoEntity = userInfoRepository.findOne(userTokenEntity.getUserId());
+			Optional<UserInfoEntity> userInfoEntityOptional = userInfoRepository.findById( userTokenEntity.getUserId());
 
-			if (userInfoEntity != null) {
+			if (userInfoEntityOptional.isPresent()) {
+				final UserInfoEntity userInfoEntity = userInfoEntityOptional.get();
 				return new UserInfo(userInfoEntity.getId(), userInfoEntity.getEmail(),
 						userInfoEntity.getFullName(), userInfoEntity.getAvatarUrl());
 			}

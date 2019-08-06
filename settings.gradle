@@ -1,1 +1,2 @@
 rootProject.name = 'user'
+enableFeaturePreview('IMPROVED_POM_SUPPORT')
