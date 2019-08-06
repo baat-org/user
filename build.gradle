@@ -10,17 +10,28 @@ repositories {
     mavenLocal()
 }
 
+ext {
+    springBootVersion = '2.0.5.RELEASE'
+    commonsLang3Version = '3.4'
+    mySQLConnectorVersion = '5.1.44'
+    junitVersion = '4.12'
+    baatCoreVersion = '1.0'
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-dependencies:2.0.5.RELEASE'
-    implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation 'org.apache.commons:commons-lang3:3.4'
-    implementation 'org.springframework.boot:spring-boot-starter-data-jpa:2.0.5.RELEASE'
-    implementation 'mysql:mysql-connector-java:5.1.44'
+    implementation "org.springframework.boot:spring-boot-dependencies:${project.springBootVersion}"
+    implementation "org.springframework.boot:spring-boot-starter-web:${project.springBootVersion}"
+    implementation "org.springframework.boot:spring-boot-starter-amqp:${project.springBootVersion}"
+    implementation "org.springframework.boot:spring-boot-starter-data-jpa:${project.springBootVersion}"
+    implementation "org.apache.commons:commons-lang3:${project.commonsLang3Version}"
+    implementation "mysql:mysql-connector-java:${project.mySQLConnectorVersion}"
+    implementation "org.baat:core:${project.baatCoreVersion}"
 
-    implementation 'org.baat:core:1.0'
-
-    testImplementation 'org.springframework.boot:spring-boot-starter-test:2.0.5.RELEASE'
-    testImplementation 'junit:junit:4.12'
+    testImplementation "org.springframework.boot:spring-boot-starter-test:${project.springBootVersion}"
+    testImplementation "junit:junit:${project.junitVersion}"
 
     components {
         withModule('org.springframework:spring-beans') {
