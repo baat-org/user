@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
 @EnableJpaRepositories("org.baat.user.repository")
-@EntityScan("baat.user.repository.entity")
+@EntityScan("org.baat.user.repository.entity")
 @ComponentScan("org.baat")
 public class UserApplication {
 	public static void main(String[] args) {
