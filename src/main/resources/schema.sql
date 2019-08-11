@@ -15,7 +15,7 @@
 
 CREATE TABLE IF NOT EXISTS `user_info` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `email` varchar(200) NOT NULL,
+  `email` varchar(150) NOT NULL,
   `full_name` varchar(500) NOT NULL,
   `avatar_url` varchar(2000) NULL,
   PRIMARY KEY (`id`),
