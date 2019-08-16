@@ -12,7 +12,7 @@ import java.util.Arrays;
 @Table(name = "user_credentials")
 public class UserCredentialsEntity {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private Long userId;
 	private String userName;

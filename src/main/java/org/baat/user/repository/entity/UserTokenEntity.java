@@ -11,7 +11,7 @@ import javax.persistence.Table;
 @Table(name = "user_token")
 public class UserTokenEntity {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private Long userId;
 	private String userToken;
