@@ -35,10 +35,10 @@ public class UserService {
         if (passedCredentials == null)
             throw new IllegalArgumentException("User Credentials must be provided");
 
-        if (StringUtils.isEmpty(passedCredentials.getUserName()))
+        if (StringUtils.hasLength(passedCredentials.getUserName()))
             throw new IllegalArgumentException("user name must be provided");
 
-        if (StringUtils.isEmpty(passedCredentials.getPassword()))
+        if (StringUtils.hasLength(passedCredentials.getPassword()))
             throw new IllegalArgumentException("password must be provided");
 
         final UserInfoEntity userInfoEntity = userInfoRepository.findByEmail(passedCredentials.getUserName());
@@ -64,13 +64,13 @@ public class UserService {
         if (signupRequest == null)
             throw new IllegalArgumentException("signupRequest must be provided");
 
-        if (StringUtils.isEmpty(signupRequest.getEmail()))
+        if (StringUtils.hasLength(signupRequest.getEmail()))
             throw new IllegalArgumentException("email must be provided");
 
-        if (StringUtils.isEmpty(signupRequest.getName()))
+        if (StringUtils.hasLength(signupRequest.getName()))
             throw new IllegalArgumentException("name must be provided");
 
-        if (StringUtils.isEmpty(signupRequest.getPassword()))
+        if (StringUtils.hasLength(signupRequest.getPassword()))
             throw new IllegalArgumentException("password must be provided");
 
         if (userInfoRepository.findByEmail(signupRequest.getEmail()) != null)
@@ -94,7 +94,7 @@ public class UserService {
     }
 
     public boolean validateUserToken(final String userToken) {
-        if (StringUtils.isEmpty(userToken))
+        if (StringUtils.hasLength(userToken))
             return false;
 
         return (userTokenRepository.findByUserToken(userToken) != null);
