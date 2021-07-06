@@ -13,13 +13,17 @@ import org.baat.user.repository.entity.UserTokenEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
+import org.springframework.validation.annotation.Validated;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import java.util.*;
 import java.util.stream.Collectors;
 
 import static org.baat.user.util.Passwords.*;
 
 @Service
+@Validated
 public class UserService {
 
     @Autowired
@@ -31,16 +35,7 @@ public class UserService {
     @Autowired
     UserTokenRepository userTokenRepository;
 
-    public String authenticate(final UserCredentials passedCredentials) {
-        if (passedCredentials == null)
-            throw new IllegalArgumentException("User Credentials must be provided");
-
-        if (StringUtils.hasLength(passedCredentials.getUserName()))
-            throw new IllegalArgumentException("user name must be provided");
-
-        if (StringUtils.hasLength(passedCredentials.getPassword()))
-            throw new IllegalArgumentException("password must be provided");
-
+    public String authenticate(@Valid @NotNull final UserCredentials passedCredentials) {
         final UserInfoEntity userInfoEntity = userInfoRepository.findByEmail(passedCredentials.getUserName());
         if (userInfoEntity == null)
             throw new IllegalArgumentException("Invalid user name, could not find user with such user name");
@@ -60,19 +55,7 @@ public class UserService {
         return userToken.getUserToken();
     }
 
-    public String signup(final SignupRequest signupRequest) {
-        if (signupRequest == null)
-            throw new IllegalArgumentException("signupRequest must be provided");
-
-        if (StringUtils.hasLength(signupRequest.getEmail()))
-            throw new IllegalArgumentException("email must be provided");
-
-        if (StringUtils.hasLength(signupRequest.getName()))
-            throw new IllegalArgumentException("name must be provided");
-
-        if (StringUtils.hasLength(signupRequest.getPassword()))
-            throw new IllegalArgumentException("password must be provided");
-
+    public String signup(@Valid @NotNull final SignupRequest signupRequest) {
         if (userInfoRepository.findByEmail(signupRequest.getEmail()) != null)
             throw new IllegalArgumentException("User with same email already exists");
 
@@ -94,7 +77,7 @@ public class UserService {
     }
 
     public boolean validateUserToken(final String userToken) {
-        if (StringUtils.hasLength(userToken))
+        if (!StringUtils.hasLength(userToken))
             return false;
 
         return (userTokenRepository.findByUserToken(userToken) != null);
